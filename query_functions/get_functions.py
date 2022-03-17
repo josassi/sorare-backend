@@ -1,8 +1,10 @@
-from requests import post as post
-from requests_functions import *
-from etl_functions import *
 from datetime import datetime
 from time import sleep
+
+from requests import post as post
+
+from etl_functions import *
+from requests_functions import *
 
 URL = 'https://api.sorare.com/graphql'
 COMPETITIONS = ["bundesliga-de",
@@ -92,11 +94,8 @@ def get_price_info_from_cards_df(df_cards: pd.DataFrame) -> (dict, pd.DataFrame)
     additional "%toLastAuctionPrice" column comparing the single sale offer to the latest auction price.
     """
 
-    price_dict = {}
-    price_dict["last_auction_price"] = None
-    price_dict["max_auction_price"] = None
-    price_dict["average_auction_price"] = None
-    price_dict["lower_single_sale_offer"] = None
+    price_dict = {"last_auction_price": None, "max_auction_price": None, "average_auction_price": None,
+                  "lower_single_sale_offer": None}
 
     now = pd.to_datetime(datetime.now().astimezone())
 
