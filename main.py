@@ -1,4 +1,4 @@
-from get_functions import *
+from query_functions.get_functions import *
 
 
 def get_all_players_price_info(competition_slug: str,
