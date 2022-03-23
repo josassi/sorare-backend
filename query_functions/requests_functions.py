@@ -20,9 +20,10 @@ def players_from_club_query(club_slug: str) -> str:
                     {{
                         nodes
                             {{
-                                displayName
                                 slug
-                                
+                                position
+                                country{{code}}
+                                age
                                 allSo5Scores(last:15){{
                                 nodes{{score}}
                                 }}
@@ -82,6 +83,7 @@ def cards_from_player_query(player_slug: str, rarity_list: str, end_cursor: str 
         currentPrice
         cancelled
         open
+        endDate
     }}
     
     }}
