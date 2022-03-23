@@ -7,7 +7,7 @@ from query_functions.etl_functions import *
 from query_functions.requests_functions import *
 
 URL = 'https://api.sorare.com/graphql'
-SLEEP = 2
+SLEEP = 3
 
 
 def get_clubs_from_compet(competition_slug: str, attributes_list: list = None) -> pd.DataFrame:
