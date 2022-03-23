@@ -3,8 +3,8 @@ from time import sleep
 
 from requests import post as post
 
-from query_functions.etl_functions import *
-from query_functions.requests_functions import *
+from get_data.query_functions.etl_functions import *
+from get_data.query_functions.requests_functions import *
 
 URL = 'https://api.sorare.com/graphql'
 SLEEP = 3

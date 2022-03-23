@@ -1,4 +1,4 @@
-from query_functions.get_functions import *
+from get_data.query_functions.get_functions import *
 
 
 def append_all_players_price_info_from_club(club_slug: str,
@@ -82,12 +82,12 @@ def append_all_players_price_and_score_info_from_club(club_slug: str,
     return total_player_iteration, club_iteration, club_player_iteration
 
 
-def get_df_all_players_price_info_from_competition(competition_slug: str,
-                                                   rarity_list: str = "[unique, super_rare, rare, limited]",
-                                                   verbose: bool = False,
-                                                   limit_players: int = None,
-                                                   limit_club: int = None
-                                                   ) -> pd.DataFrame:
+def get_df_all_players_info_from_competition(competition_slug: str,
+                                             rarity_list: str = "[unique, super_rare, rare, limited]",
+                                             verbose: bool = False,
+                                             limit_players: int = None,
+                                             limit_club: int = None
+                                             ) -> pd.DataFrame:
     """
 
     :param competition_slug:
@@ -121,6 +121,6 @@ if __name__ == "__main__":
                     "laliga-santander",
                     "serie-a-it"]
     EXPORT_PATH = "~/Documents/Code/Sorare/"
-    df = get_df_all_players_price_info_from_competition(competition_slug=COMPETITIONS[1], rarity_list="[limited]",
-                                                        verbose=True, limit_club=10, limit_players=15)
+    df = get_df_all_players_info_from_competition(competition_slug=COMPETITIONS[1], rarity_list="[limited]",
+                                                  verbose=True, limit_club=10, limit_players=15)
     df.to_csv(EXPORT_PATH + "results_all_limited_score.csv")
