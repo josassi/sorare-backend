@@ -22,6 +22,10 @@ def players_from_club_query(club_slug: str) -> str:
                             {{
                                 slug
                                 position
+                                activeClub{{
+                                slug
+                                country{{code}}
+                                }}
                                 country{{code}}
                                 age
                                 allSo5Scores(last:15){{
