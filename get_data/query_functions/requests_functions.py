@@ -28,7 +28,7 @@ def players_from_club_query(club_slug: str) -> str:
                                 }}
                                 country{{code}}
                                 age
-                                allSo5Scores(last:15){{
+                                allSo5Scores(first:15){{
                                 nodes{{score}}
                                 }}
                                 
