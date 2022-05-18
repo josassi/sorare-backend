@@ -1,5 +1,5 @@
 from get_data.query_functions.get_functions import *
-
+import os
 
 def append_all_players_price_info_from_club(club_slug: str,
                                             list_players_price_info: list,
@@ -101,16 +101,21 @@ def get_df_all_players_info_from_competition(competition_slug: str,
     clubs = set(get_clubs_from_compet(competition_slug=competition_slug)["slug"])
     total_player_iteration = 0
     for club_iteration, club in enumerate(clubs):
-        total_player_iteration, club_iteration, club_player_iteration = append_all_players_price_and_score_info_from_club(
-            club_slug=club,
-            list_players_price_info=list_players_price_info,
-            rarity_list=rarity_list,
-            verbose=verbose,
-            limit_players=limit_players,
-            club_iteration=club_iteration,
-            total_player_iteration=total_player_iteration)
-        if club_iteration is not None and club_iteration == limit_club - 1:
-            break
+        try:
+            total_player_iteration, club_iteration, club_player_iteration = append_all_players_price_and_score_info_from_club(
+                club_slug=club,
+                list_players_price_info=list_players_price_info,
+                rarity_list=rarity_list,
+                verbose=verbose,
+                limit_players=limit_players,
+                club_iteration=club_iteration,
+                total_player_iteration=total_player_iteration)
+            if limit_club is not None and club_iteration == limit_club - 1:
+                break
+        except requests.exceptions.ProxyError as e:
+            print(e)
+        except requests.exceptions.ConnectionError as e:
+            print(e)
     df_final = pd.DataFrame(list_players_price_info)
     return df_final
 
@@ -120,7 +125,7 @@ if __name__ == "__main__":
                     "ligue-1-fr",
                     "laliga-santander",
                     "serie-a-it"]
-    EXPORT_PATH = "~/Documents/Code/Sorare/"
+    EXPORT_PATH = "~/Documents/Code/Sorare/test3/"
     df = get_df_all_players_info_from_competition(competition_slug=COMPETITIONS[1], rarity_list="[limited]",
-                                                  verbose=True, limit_club=10, limit_players=15)
-    df.to_csv(EXPORT_PATH + "results_all_limited_score.csv")
+                                                  verbose=True, limit_club=None, limit_players=None)
+    df.to_csv(os.path.join(EXPORT_PATH, "results_all_limited_score.csv"))
